@@ -62,7 +62,7 @@ class CountDown extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
       this.setState({
-        lastUntil: prevState.until,
+        lastUntil: 0,
         until: Math.max(prevProps.until, 0)
       });
     }
@@ -195,7 +195,7 @@ class CountDown extends React.Component {
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
-    const Component = this.props.onPress ? TouchableOpacity : View;
+    const Component = View;
 
     return (
       <Component
