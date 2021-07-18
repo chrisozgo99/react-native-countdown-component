@@ -105,10 +105,11 @@ class CountDown extends React.Component {
     // in another thread
     // const {lastUntil, until} = this.state;
 
-    if (this.state.lastUntil === this.state.until || !this.props.running) {
-      return;
-    }
+ 
     if (this.state.until === 1 || (this.state.until === 0 && this.state.lastUntil !== 1)) {
+      if (this.state.lastUntil === this.state.until || !this.props.running) {
+        return;
+      }
       if (this.props.onFinish) {
         this.props.onFinish();
       }
@@ -127,6 +128,9 @@ class CountDown extends React.Component {
         lastUntil: this.state.until,
         until: Math.max(0, this.state.until - 1)
       });
+    }
+    if (this.state.lastUntil === this.state.until || !this.props.running) {
+      return;
     }
   };
 
@@ -195,7 +199,7 @@ class CountDown extends React.Component {
     const {until} = this.state;
     const {days, hours, minutes, seconds} = this.getTimeLeft();
     const newTime = sprintf('%02d:%02d:%02d:%02d', days, hours, minutes, seconds).split(':');
-    const Component = View;
+    const Component = this.props.onPress ? TouchableOpacity : View;
 
     return (
       <Component
