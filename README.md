@@ -1,8 +1,10 @@
 # react-native-countdown
 React Native CountDown
 
+Forked from talalmajali/react-native-countdown-component to include state updates and other personal preferences for a corporate project
+
 ## Installation
-Run `npm install react-native-countdown-component --save` OR `yarn add react-native-countdown-component --save`
+Run `npm install chrisozgo99/react-native-countdown-component --save`
 
 ## Props
 | Name | Description | Type | Default Value |
