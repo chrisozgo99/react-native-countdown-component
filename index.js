@@ -59,22 +59,23 @@ class CountDown extends React.Component {
     AppState.removeEventListener('change', this._handleAppStateChange);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
-      this.setState({
-        lastUntil: 0,
-        until: Math.max(prevProps.until, 0)
-      });
-    }
-  }
-  // componentWillReceiveProps(nextProps) {
-  //   if (this.props.until !== nextProps.until || this.props.id !== nextProps.id) {
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (this.props.until !== prevProps.until || this.props.id !== prevProps.id) {
   //     this.setState({
-  //       lastUntil: this.state.until,
-  //       until: Math.max(nextProps.until, 0)
+  //       lastUntil: 0,
+  //       until: Math.max(prevProps.until, 0)
   //     });
   //   }
   // }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.until !== nextProps.until || this.props.id !== nextProps.id) {
+      this.setState({
+        lastUntil: this.state.until,
+        until: Math.max(nextProps.until, 0)
+      });
+    }
+  }
 
   _handleAppStateChange = currentAppState => {
     const {until, wentBackgroundAt} = this.state;
@@ -121,6 +122,7 @@ class CountDown extends React.Component {
     if (this.state.until === 0) {
       this.setState({lastUntil: 0, until: 0});
     } else {
+      //
       if (this.props.onChange) {
         this.props.onChange(this.state.until);
       }
